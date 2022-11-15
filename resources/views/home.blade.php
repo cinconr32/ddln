@@ -3,7 +3,7 @@
 @section('tables')
 
     <div class="card bg-light shadow p-3 mb-3 bg-body rounded">
-        <h1 class="d-flex justify-content-center">DATA PENJUALAN DODOLANAN</h1>
+        <h1 class="d-flex justify-content-center">DATA PENJUALAN</h1>
     </div>
 
     <div class="card bg-light shadow p-3 bg-body rounded">

@@ -19,17 +19,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1; ?>
-                    @foreach( $barangs as $barang )
+                    @foreach( $barangs as $no => $barang )
                     <tr>
-                        <td><?= $no++ ?></td>
+                        <td>{{ $no+1 }}</td>
                         <td>{{ $barang->namabarang }}</td>
                         <td>{{ $barang->jenisbarang }}</td>
                         <td>{{ $barang->hargamodal }}</td>
                         <td>{{ $barang->hargajual }}</td>
                         <td>{{ $barang->stock }}</td>
                         <td>
-                            <a href="/editbarang/{{ $barang->id }}">
+                            <a href="{{ route('databarang.edit', $barang->id) }}">
                                 <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i></button>
                             </a>
                             <a onclick="return confirm('Apakah anda yakin? ');" href="">

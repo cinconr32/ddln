@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\BarangController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,12 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/databarang', [BarangController::class, 'index']);
-Route::get('/editbarang/{barang}', [BarangController::class, 'show']);
+// Route::get('/databarang', [BarangController::class, 'index']);
+// Route::get('/databarang/edit/{barang}', [BarangController::class, 'edit']);
+// Route::patch('/databarang/update/', [BarangController::class, 'update']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::resource('databarang', BarangController::class);

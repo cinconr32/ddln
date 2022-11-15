@@ -8,12 +8,19 @@
         </div>
 
         <div class="card">
-            <form class="m-2" method="post" action="">
-                <input type="hidden" name="id" id="input" value="{{ $barang->id }}">
+            <form class="m-2" method="post" action="{{ route('databarang.update', $barang->id) }}">
+                @csrf
+                @method('patch')
+                <input type="hidden" name="id" id="id" value="{{ $barang->id }}">
 
                 <div class="form-group">
-                    <label class="font-weight-bolder" for="input">NAMA BARANG</label>
-                    <input type="text" class="form-control" id="input" name="namabarang" value="{{ $barang->namabarang }}">
+                    <label class="font-weight-bolder" for="namabarang">NAMA BARANG</label>
+                    <input type="text" class="form-control @error('namabarang') is-invalid @enderror" id="namabarang" name="namabarang" value="{{ $barang->namabarang }}" >
+                    @error('namabarang')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
                 </div>
 
                 <div class="form-group">
@@ -27,18 +34,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bolder" for="input">HARGA BELI</label>
-                    <input type="text" class="form-control" id="input" name="hargamodal" value="{{ $barang->hargamodal }}">
+                    <label class="font-weight-bolder" for="hargamodal">HARGA BELI</label>
+                    <input type="text" class="form-control @error('hargamodal') is-invalid @enderror" id="hargamodal" name="hargamodal" value="{{ $barang->hargamodal }}">
+                    @error('hargamodal')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
                 </div>
 
                 <div class="form-group">
-                    <label class="font-weight-bolder" for="input">HARGA JUAL</label>
-                    <input type="text" class="form-control" id="input" name="hargajual" value="{{ $barang->hargajual }}">
+                    <label class="font-weight-bolder" for="hargajual">HARGA JUAL</label>
+                    <input type="text" class="form-control @error('hargajual') is-invalid @enderror" id="hargajual" name="hargajual" value="{{ $barang->hargajual }}">
+                    @error('hargajual')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
                 </div>
 
                 <div>
-                    <label class="font-weight-bolder" for="input">STOCK</label>
-                    <input type="text" class="form-control" id="input" name="stock" value="{{ $barang->stock }}">
+                    <label class="font-weight-bolder" for="stock">STOCK</label>
+                    <input type="text" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" value="{{ $barang->stock }}">
+                    @error('stock')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
                 </div>
 
                 <div class="row justify-content-end">

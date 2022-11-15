@@ -23,10 +23,10 @@
                         <a href="/dashboard"><i class="fa-solid fa-chart-line p-2"></i>Dashboard</a>
                     </li>
                     <li>
-                        <a href="/databarang"><i class="fa-solid fa-table p-2"></i>Data Barang</a>
+                        <a href="{{ route('databarang.index') }}"><i class="fa-solid fa-table p-2"></i>Data Barang</a>
                     </li>
                     <li>
-                        <a href="/tambahbarang"><i class="fa-solid fa-square-plus p-2"></i>Tambah Barang</a>
+                        <a href="{{ route('databarang.create') }}"><i class="fa-solid fa-square-plus p-2"></i>Tambah Barang</a>
                     </li>
                     <li>
                         <a href="/tambahstock"><i class="fa-solid fa-square-plus p-2"></i>Tambah Stock</a>
@@ -39,6 +39,15 @@
                     </li>
                     <li>
                         <a href="/datapenjualan"><i class="fa-solid fa-table p-2"></i>Data Penjualan</a>
+                    </li>
+                    <li>
+                        {{-- <a href=""><form action="/logout" method="post">
+                            @csrf
+                            <button class="" type="submit">
+                                <i class="fa-solid fa-power-off p-2"></i>Logout
+                            </button>
+                        </form></a> --}}
+                        <a href="/logout"><i class="fa-solid fa-power-off p-2"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -63,6 +72,23 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/about">About</a>
                             </li>
+                            @auth
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                        Welcome, {{ auth()->user()->name }}!
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <form action="/logout" method="post">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item"><i class="fa-solid fa-power-off p-2"></i>Logout</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>

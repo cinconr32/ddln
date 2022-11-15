@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('namabarang')->unique();
+            $table->string('namabarang');
             $table->enum('jenisbarang', ['Makanan', 'Minuman']);
             $table->integer('hargamodal');
             $table->integer('hargajual');
