@@ -118,8 +118,11 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang $barang)
+    public function destroy(Barang $barang, $id)
     {
-        //
+        $barang = Barang::find($id);
+        $barang->delete();
+
+        return back();
     }
 }

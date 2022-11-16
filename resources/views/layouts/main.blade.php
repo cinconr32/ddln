@@ -40,15 +40,6 @@
                     <li>
                         <a href="/datapenjualan"><i class="fa-solid fa-table p-2"></i>Data Penjualan</a>
                     </li>
-                    <li>
-                        {{-- <a href=""><form action="/logout" method="post">
-                            @csrf
-                            <button class="" type="submit">
-                                <i class="fa-solid fa-power-off p-2"></i>Logout
-                            </button>
-                        </form></a> --}}
-                        <a href="/logout"><i class="fa-solid fa-power-off p-2"></i>Logout</a>
-                    </li>
                 </ul>
             </div>
         </nav>
@@ -66,6 +57,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
+                            @auth
+                            <li class="nav-item">
+                                <a class="nav-link disabled">Welcome, {{ auth()->user()->name }}!</a>
+                            </li>
+                            @endauth
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
@@ -73,16 +69,11 @@
                                 <a class="nav-link" href="/about">About</a>
                             </li>
                             @auth
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                                        Welcome, {{ auth()->user()->name }}!
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <form action="/logout" method="post">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item"><i class="fa-solid fa-power-off p-2"></i>Logout</button>
-                                        </form>
-                                    </div>
+                                <li class="nav-item">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm m-1 p-0 nav-link"><i class="fa-solid fa-power-off p-2"></i>Logout</button>
+                                    </form>
                                 </li>
                             @else
                                 <li class="nav-item">

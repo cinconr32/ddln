@@ -28,12 +28,18 @@
                         <td>{{ $barang->hargajual }}</td>
                         <td>{{ $barang->stock }}</td>
                         <td>
-                            <a href="{{ route('databarang.edit', $barang->id) }}">
-                                <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i></button>
-                            </a>
-                            <a onclick="return confirm('Apakah anda yakin? ');" href="">
-                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                            </a>
+                            <div class="row">
+                                <a href="{{ route('databarang.edit', $barang->id) }}">
+                                    <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i></button>
+                                </a>
+                                <form action="{{ route('databarang.destroy', $barang->id) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <a onclick="return confirm('Apakah anda yakin? ');" href="">
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                    </a>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
