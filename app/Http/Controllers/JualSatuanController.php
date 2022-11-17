@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\JualSatuan;
-use App\Http\Requests\StoreJualSatuanRequest;
-use App\Http\Requests\UpdateJualSatuanRequest;
+use App\Models\Barang;
+use Illuminate\Http\Request;
 
 class JualSatuanController extends Controller
 {
@@ -15,7 +15,7 @@ class JualSatuanController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,7 +25,9 @@ class JualSatuanController extends Controller
      */
     public function create()
     {
-        //
+        return view('formpenjualan')->with([
+            'barangs' => Barang::all()
+        ]);
     }
 
     /**
@@ -34,9 +36,30 @@ class JualSatuanController extends Controller
      * @param  \App\Http\Requests\StoreJualSatuanRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreJualSatuanRequest $request)
+    public function store(Request $request, Barang $barang)
     {
-        //
+        $barang = Barang::find($request->barang);
+
+        $validatedData = $request->validate([
+            'hargajual' => 'required|numeric',
+            'jumlah' => 'required|numeric',
+            'nominalbayar' => 'required|numeric'
+        ]);
+
+        $validatedData['barang_id'] = $request->barang;
+        
+        if( $request->jumlah <= $barang->stock ) {
+            JualSatuan::create($validatedData);
+            
+            Barang::where('id', $request->barang)
+            ->update(['stock' => $barang->stock - $request->jumlah]);
+            
+            return redirect('/penjualan')->with('success', 'Data berhasil ditambahkan!');
+        }
+
+        else {
+            return back()->with('danger', 'Stock tidak mencukupi!');
+        }
     }
 
     /**
@@ -68,7 +91,7 @@ class JualSatuanController extends Controller
      * @param  \App\Models\JualSatuan  $jualSatuan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateJualSatuanRequest $request, JualSatuan $jualSatuan)
+    public function update(Request $request, JualSatuan $jualSatuan)
     {
         //
     }
@@ -82,5 +105,13 @@ class JualSatuanController extends Controller
     public function destroy(JualSatuan $jualSatuan)
     {
         //
+    }
+
+    public function checkHargaModal(Request $request, Barang $barang)
+    {
+        $barang = Barang::find($request->namabarang);
+        $hargajual = $barang->hargajual;
+
+        return response()->json(['hargajual' => $hargajual]);
     }
 }

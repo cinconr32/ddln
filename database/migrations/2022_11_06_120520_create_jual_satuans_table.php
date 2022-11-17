@@ -18,9 +18,8 @@ return new class extends Migration
             $table->foreignId('barang_id');
             $table->integer('hargajual');
             $table->integer('jumlah');
-            $table->integer('totaljual');
             $table->integer('nominalbayar');
-            $table->dateTime('tanggal');
+            $table->timestamps();
         });
     }
 

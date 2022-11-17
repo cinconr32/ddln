@@ -19,9 +19,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach( $barangs as $no => $barang )
+                    @foreach( $barangs as $barang )
                     <tr>
-                        <td>{{ $no+1 }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $barang->namabarang }}</td>
                         <td>{{ $barang->jenisbarang }}</td>
                         <td>{{ $barang->hargamodal }}</td>

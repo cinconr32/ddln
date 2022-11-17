@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/696b2ed02d.js" crossorigin="anonymous"></script>
-    <title> Data Penjualan </title>
+    <title>Data Penjualan</title>
 </head>
 <body>
     <div class="wrapper d-flex align-items-stretch">
@@ -19,13 +19,13 @@
                 <img src="/img/android-chrome-512x512.png" class="img logo rounded-circle mb-5">
                 <h5 class="text-light">MENU</h5>
                 <ul class="list-unstyled components mb-5">
-                    <li>
+                    <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
                         <a href="/dashboard"><i class="fa-solid fa-chart-line p-2"></i>Dashboard</a>
                     </li>
-                    <li>
+                    <li class="{{ Request::is('databarang', 'databarang/*/edit') ? 'active' : '' }}">
                         <a href="{{ route('databarang.index') }}"><i class="fa-solid fa-table p-2"></i>Data Barang</a>
                     </li>
-                    <li>
+                    <li class="{{ Request::is('databarang/create') ? 'active' : '' }}">
                         <a href="{{ route('databarang.create') }}"><i class="fa-solid fa-square-plus p-2"></i>Tambah Barang</a>
                     </li>
                     <li>
@@ -34,8 +34,8 @@
                     <li>
                         <a href="/historystock"><i class="fa-solid fa-clock-rotate-left p-2"></i>History Stock</a>
                     </li>
-                    <li>
-                        <a href="/formpenjualan"><i class="fa-brands fa-wpforms p-2"></i>Form Penjualan</a>
+                    <li class="{{ Request::is('penjualan/create') ? 'active' : '' }}">
+                        <a href="{{ route('penjualan.create') }}"><i class="fa-brands fa-wpforms p-2"></i>Form Penjualan</a>
                     </li>
                     <li>
                         <a href="/datapenjualan"><i class="fa-solid fa-table p-2"></i>Data Penjualan</a>
@@ -62,10 +62,10 @@
                                 <a class="nav-link disabled">Welcome, {{ auth()->user()->name }}!</a>
                             </li>
                             @endauth
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
                                 <a class="nav-link" href="/about">About</a>
                             </li>
                             @auth
@@ -84,6 +84,7 @@
                     </div>
                 </div>
             </nav>
+            @include('layouts.alert')
 
             @yield('tables')
 

@@ -37,7 +37,7 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'namabarang' => 'required',
             'jenisbarang' => 'required',
             'hargamodal' => 'required|numeric',
@@ -45,15 +45,9 @@ class BarangController extends Controller
             'stock' => 'required|numeric'
         ]);
 
-        $barang = new Barang;
-        $barang->namabarang = $request->namabarang;
-        $barang->jenisbarang = $request->jenisbarang;
-        $barang->hargamodal = $request->hargamodal;
-        $barang->hargajual = $request->hargajual;
-        $barang->stock = $request->stock;
-        $barang->save();
+        Barang::create($validatedData);
 
-        return redirect('/databarang');
+        return redirect('/databarang')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -73,7 +67,7 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function edit(Barang $barang, $id)
+    public function edit($id)
     {
         // return view('editbarang', [
         //     "barang" => $barang
@@ -109,7 +103,7 @@ class BarangController extends Controller
         Barang::where('id', $request->id)
                 ->update($validatedData);
 
-        return redirect('/databarang');
+        return redirect('/databarang')->with('info', 'Data berhasil diubah!');
     }
 
     /**
@@ -118,11 +112,10 @@ class BarangController extends Controller
      * @param  \App\Models\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang $barang, $id)
+    public function destroy($id)
     {
-        $barang = Barang::find($id);
-        $barang->delete();
+        Barang::destroy($id);
 
-        return back();
+        return back()->with('warning', 'Data berhasil dihapus!');
     }
 }

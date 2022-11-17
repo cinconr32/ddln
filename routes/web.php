@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\JualSatuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::resource('databarang', BarangController::class);
+
+Route::get('/penjualan/create/checkHargaModal', [JualSatuanController::class, 'checkHargaModal'])->middleware('auth');
+Route::resource('penjualan', JualSatuanController::class)->middleware('auth');

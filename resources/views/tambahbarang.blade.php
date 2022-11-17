@@ -12,7 +12,7 @@
                 @csrf
                 <div class="form-group">
                     <label class="font-weight-bolder">NAMA BARANG</label>
-                    <input type="text" class="form-control @error('namabarang') is-invalid @enderror" name="namabarang" placeholder="silahkan isi nama barang..." required>
+                    <input type="text" class="form-control @error('namabarang') is-invalid @enderror" name="namabarang" value="{{ old('namabarang') }}" placeholder="silahkan isi nama barang..." required>
                     @error('namabarang')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -22,7 +22,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bolder">JENIS BARANG</label>
-                    <select class="custom-select" name="jenisbarang" required>
+                    <select class="custom-select @error('jenisbarang') is-invalid @enderror" name="jenisbarang" required>
                         <option disabled selected hidden>pilih jenis barang...</option>
                         <option value="Makanan">Makanan</option>
                         <option value="Minuman">Minuman</option>
@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bolder">HARGA MODAL</label>
-                    <input type="text" class="form-control @error('hargamodal') is-invalid @enderror" name="hargamodal" placeholder="silahkan isi harga modal..." required>
+                    <input type="text" class="form-control @error('hargamodal') is-invalid @enderror" name="hargamodal" value="{{ old('hargamodal') }}" placeholder="silahkan isi harga modal..." required>
                     @error('hargamodal')
                         <div class="invalid-feedback">
                              {{ $message }}
@@ -46,7 +46,7 @@
 
                 <div class="form-group">
                     <label class="font-weight-bolder">HARGA JUAL</label>
-                    <input type="text" class="form-control @error('hargajual') is-invalid @enderror" name="hargajual" placeholder="silahkan isi harga jual..." required>
+                    <input type="text" class="form-control @error('hargajual') is-invalid @enderror" name="hargajual" value="{{ old('hargajual') }}" placeholder="silahkan isi harga jual..." required>
                     @error('hargajual')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -56,7 +56,7 @@
 
                 <div>
                     <label class="font-weight-bolder">STOCK</label>
-                    <input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" placeholder="silahkan isi jumlah stock..." required>
+                    <input type="text" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock') }}" placeholder="silahkan isi jumlah stock..." required>
                     @error('stock')
                         <div class="invalid-feedback">
                             {{ $message }}
