@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\JualSatuanController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +21,13 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Route::get('/databarang', [BarangController::class, 'index']);
-// Route::get('/databarang/edit/{barang}', [BarangController::class, 'edit']);
-// Route::patch('/databarang/update/', [BarangController::class, 'update']);
-
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::resource('databarang', BarangController::class);
+
+Route::resource('stock', StockController::class);
 
 Route::get('/penjualan/create/checkHargaModal', [JualSatuanController::class, 'checkHargaModal'])->middleware('auth');
 Route::resource('penjualan', JualSatuanController::class)->middleware('auth');

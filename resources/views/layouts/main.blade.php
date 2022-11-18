@@ -28,8 +28,8 @@
                     <li class="{{ Request::is('databarang/create') ? 'active' : '' }}">
                         <a href="{{ route('databarang.create') }}"><i class="fa-solid fa-square-plus p-2"></i>Tambah Barang</a>
                     </li>
-                    <li>
-                        <a href="/tambahstock"><i class="fa-solid fa-square-plus p-2"></i>Tambah Stock</a>
+                    <li class="{{ Request::is('stock/create') ? 'active' : '' }}">
+                        <a href="{{ route('stock.create') }}"><i class="fa-solid fa-square-plus p-2"></i>Tambah Stock</a>
                     </li>
                     <li>
                         <a href="/historystock"><i class="fa-solid fa-clock-rotate-left p-2"></i>History Stock</a>
@@ -37,8 +37,8 @@
                     <li class="{{ Request::is('penjualan/create') ? 'active' : '' }}">
                         <a href="{{ route('penjualan.create') }}"><i class="fa-brands fa-wpforms p-2"></i>Form Penjualan</a>
                     </li>
-                    <li>
-                        <a href="/datapenjualan"><i class="fa-solid fa-table p-2"></i>Data Penjualan</a>
+                    <li class="{{ Request::is('penjualan') ? 'active' : '' }}">
+                        <a href="{{ route('penjualan.index') }}"><i class="fa-solid fa-table p-2"></i>Data Penjualan</a>
                     </li>
                 </ul>
             </div>

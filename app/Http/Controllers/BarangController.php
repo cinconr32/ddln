@@ -14,7 +14,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        return view('databarang')->with([
+        return view('tables.databarang')->with([
             "barangs" => Barang::all()
         ]);
     }
@@ -26,7 +26,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('tambahbarang');
+        return view('tables.tambahbarang');
     }
 
     /**
@@ -69,10 +69,7 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        // return view('editbarang', [
-        //     "barang" => $barang
-        // ]);
-        return view('editbarang')->with([
+        return view('tables.editbarang')->with([
             'barang' => Barang::find($id)
         ]);
     }

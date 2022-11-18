@@ -15,7 +15,9 @@ class JualSatuanController extends Controller
      */
     public function index()
     {
-        
+        return view('tables.datapenjualan')->with([
+            'datapenjualan' => JualSatuan::with(['barang'])->get()
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class JualSatuanController extends Controller
      */
     public function create()
     {
-        return view('formpenjualan')->with([
+        return view('tables.formpenjualan')->with([
             'barangs' => Barang::all()
         ]);
     }
@@ -102,9 +104,11 @@ class JualSatuanController extends Controller
      * @param  \App\Models\JualSatuan  $jualSatuan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JualSatuan $jualSatuan)
+    public function destroy($id)
     {
-        //
+        JualSatuan::destroy($id);
+
+        return back()->with('warning', 'Data berhasil dihapus!');
     }
 
     public function checkHargaModal(Request $request, Barang $barang)

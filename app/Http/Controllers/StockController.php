@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
-use App\Http\Requests\StoreStockRequest;
+use App\Models\Barang;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateStockRequest;
 
 class StockController extends Controller
@@ -15,7 +16,9 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+        return view('tables.stock')->with([
+            'stocks' => Stock::all()
+        ]);
     }
 
     /**
@@ -25,7 +28,9 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+        return view('tables.tambahstock')->with([
+            'barangs' => Barang::all()
+        ]);
     }
 
     /**
@@ -34,9 +39,23 @@ class StockController extends Controller
      * @param  \App\Http\Requests\StoreStockRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStockRequest $request)
+    public function store(Request $request)
     {
-        //
+        $barang = Barang::find($request->barang);
+
+        $validatedData = $request->validate([
+            'barang' => 'required',
+            'jumlah' => 'required|numeric'
+        ]);
+
+        $validatedData['barang_id'] = $request->barang;
+
+        Stock::create($validatedData);
+
+        Barang::where('id', $request->barang)
+        ->update(['stock' => $barang->stock + $request->jumlah]);
+
+        return redirect('/stock')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
