@@ -16,7 +16,8 @@ class JualSatuanController extends Controller
     public function index()
     {
         return view('tables.datapenjualan')->with([
-            'datapenjualan' => JualSatuan::with(['barang'])->get()
+            'datapenjualan' => JualSatuan::with(['barang'])->get(),
+            'title' => 'Riwayat Penjualan'
         ]);
     }
 
@@ -28,7 +29,8 @@ class JualSatuanController extends Controller
     public function create()
     {
         return view('tables.formpenjualan')->with([
-            'barangs' => Barang::all()
+            'barangs' => Barang::all(),
+            'title' => 'Form Penjualan'
         ]);
     }
 

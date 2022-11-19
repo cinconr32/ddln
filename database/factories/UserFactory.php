@@ -33,6 +33,14 @@ class UserFactory extends Factory
             'password' => bcrypt('admin'),
             'remember_token' => Str::random(10)
         ];
+        // return [
+        //     'name' => 'User',
+        //     'username' => 'user',
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'email_verified_at' => now(),
+        //     'password' => bcrypt('user'),
+        //     'remember_token' => Str::random(10)
+        // ];
     }
 
     /**

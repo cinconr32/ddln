@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use App\Models\Barang;
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateStockRequest;
 
 class StockController extends Controller
 {
@@ -17,7 +16,8 @@ class StockController extends Controller
     public function index()
     {
         return view('tables.stock')->with([
-            'stocks' => Stock::all()
+            'stocks' => Stock::with(['barang'])->get(),
+            'title' => 'Riwayat Stock Barang'
         ]);
     }
 
@@ -29,7 +29,8 @@ class StockController extends Controller
     public function create()
     {
         return view('tables.tambahstock')->with([
-            'barangs' => Barang::all()
+            'barangs' => Barang::all(),
+            'title' => 'Tambah Stock'
         ]);
     }
 
@@ -87,7 +88,7 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStockRequest $request, Stock $stock)
+    public function update(Request $request, Stock $stock)
     {
         //
     }
@@ -98,8 +99,10 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Stock $stock)
+    public function destroy($id)
     {
-        //
+        Stock::destroy($id);
+
+        return back()->with('warning', 'Data berhasil dihapus!');
     }
 }

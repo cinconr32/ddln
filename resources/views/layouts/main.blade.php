@@ -10,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/696b2ed02d.js" crossorigin="anonymous"></script>
-    <title>Data Penjualan</title>
+    <title>Data Penjualan | {{ $title }}</title>
 </head>
 <body>
     <div class="wrapper d-flex align-items-stretch">
+        @can('auth')
         <nav id="sidebar">
             <div class="p-4 pt-5">
                 <img src="/img/android-chrome-512x512.png" class="img logo rounded-circle mb-5">
@@ -31,8 +32,8 @@
                     <li class="{{ Request::is('stock/create') ? 'active' : '' }}">
                         <a href="{{ route('stock.create') }}"><i class="fa-solid fa-square-plus p-2"></i>Tambah Stock</a>
                     </li>
-                    <li>
-                        <a href="/historystock"><i class="fa-solid fa-clock-rotate-left p-2"></i>History Stock</a>
+                    <li class="{{ Request::is('stock') ? 'active' : '' }}">
+                        <a href="{{ route('stock.index') }}"><i class="fa-solid fa-clock-rotate-left p-2"></i>History Stock</a>
                     </li>
                     <li class="{{ Request::is('penjualan/create') ? 'active' : '' }}">
                         <a href="{{ route('penjualan.create') }}"><i class="fa-brands fa-wpforms p-2"></i>Form Penjualan</a>
@@ -43,15 +44,17 @@
                 </ul>
             </div>
         </nav>
+        @endcan
     
-
         <div id="content" class="p-3 p-md-3">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
+                    @can('auth')
                     <button type="button" id="sidebarCollapse" class="btn btn-primary">
                         <i class="fa fa-bars"></i>
                         <span class="sr-only">Toggle Menu</span>
                     </button>
+                    @endcan
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                     </button>

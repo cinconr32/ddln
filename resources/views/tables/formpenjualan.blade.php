@@ -29,7 +29,7 @@
 
             <div class="">
                 <label class="font-weight-bolder" for="hargajual">HARGA JUAL</label>
-                <input type="text" class="form-control @error('hargajual') is-invalid @enderror" id="hargajual" name="hargajual" placeholder="silahkan masukkan nominal..." required readonly>
+                <input type="text" class="form-control @error('hargajual') is-invalid @enderror" id="hargajual" onkeyup="obtainScoreOne()" name="hargajual" placeholder="silahkan masukkan nominal..." required readonly>
                 @error('hargajual')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -39,7 +39,7 @@
 
             <div class="pt-2">
                 <label class="font-weight-bolder" for="jumlah">JUMLAH BARANG TERJUAL</label>
-                <input type="text" class="form-control @error('jumlah') is-invalid @enderror" id="jumlah" name="jumlah" placeholder="silahkan isi jumlah..." required>
+                <input type="text" class="form-control @error('jumlah') is-invalid @enderror" id="jumlah" onkeyup="obtainScoreOne()" name="jumlah" placeholder="silahkan isi jumlah..." required>
                 @error('jumlah')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -49,7 +49,7 @@
 
             <div class="pt-2">
                 <label class="font-weight-bolder" for="nominalbayar">NOMINAL PEMBAYARAN</label>
-                <input type="text" class="form-control @error('nominalbayar') is-invalid @enderror" id="nominalbayar" name="nominalbayar" placeholder="silahkan masukkan nominal..." required>
+                <input type="text" class="form-control @error('nominalbayar') is-invalid @enderror" id="nominalbayar" name="nominalbayar" placeholder="silahkan masukkan nominal..." required readonly>
                 @error('nominalbayar')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -75,6 +75,21 @@
         .then(response => response.json())
         .then(data => hargajual.value = data.hargajual)
     });
+</script>
+<script>
+    function mathScore(x, y) {
+        return (x * y);
+    }
+
+    function obtainScoreOne() {
+        //collect data
+        let n1, n2, sum;
+        n1 = Number(document.querySelector('#hargajual').value);
+        n2 = Number(document.querySelector('#jumlah').value);
+        sum = mathScore(n1, n2);
+        //Display result
+        return nominalbayar.value = sum;
+    }
 </script>
 
 @endsection

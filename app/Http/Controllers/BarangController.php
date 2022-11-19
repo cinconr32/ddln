@@ -15,7 +15,8 @@ class BarangController extends Controller
     public function index()
     {
         return view('tables.databarang')->with([
-            "barangs" => Barang::all()
+            'barangs' => Barang::all(),
+            'title' => 'Data Barang'
         ]);
     }
 
@@ -26,7 +27,9 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('tables.tambahbarang');
+        return view('tables.tambahbarang')->with([
+            'title' => 'Tambah Barang'
+        ]);
     }
 
     /**
@@ -70,7 +73,8 @@ class BarangController extends Controller
     public function edit($id)
     {
         return view('tables.editbarang')->with([
-            'barang' => Barang::find($id)
+            'barang' => Barang::find($id),
+            'title' => 'Edit Data Barang'
         ]);
     }
 

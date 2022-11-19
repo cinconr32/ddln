@@ -15,7 +15,9 @@
                         <th>Harga Beli</th>
                         <th>Harga Jual</th>
                         <th>Stock</th>
+                        @can('admin')
                         <th>Aksi</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,7 @@
                         <td>{{ $barang->hargamodal }}</td>
                         <td>{{ $barang->hargajual }}</td>
                         <td>{{ $barang->stock }}</td>
+                        @can('admin')
                         <td>
                             <div class="row">
                                 <a href="{{ route('databarang.edit', $barang->id) }}">
@@ -41,6 +44,7 @@
                                 </form>
                             </div>
                         </td>
+                        @endcan
                     </tr>
                     @endforeach
                 </tbody>

@@ -17,7 +17,9 @@
                     <th>Harga Jual</th>
                     <th>Penjualan</th>
                     <th>Pendapatan</th>
+                    @can('admin')
                     <th>Aksi</th>
+                    @endcan
                 </tr>
             </thead>
             <tbody>
@@ -32,6 +34,7 @@
                     <td>{{ 'Rp'.number_format( $penjualan->hargajual ) }}</td>
                     <td>{{ 'Rp'.number_format( $penjualan->nominalbayar ) }}</td>
                     <td>{{ 'Rp'.number_format( $pendapatan = $penjualan->hargajual * $penjualan->jumlah - $penjualan->barang->hargamodal * $penjualan->jumlah ) }}</td>
+                    @can('admin')
                     <td>
                         <form action="{{ route('penjualan.destroy', $penjualan->id) }}" method="post">
                             @csrf
@@ -41,6 +44,7 @@
                             </a>
                         </form>
                     </td>
+                    @endcan
                 </tr>
                 <?php $sum = $sum + $pendapatan; ?>
                 @endforeach

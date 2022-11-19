@@ -22,7 +22,7 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/databarang');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->with('loginError', 'Wrong username or password!');
